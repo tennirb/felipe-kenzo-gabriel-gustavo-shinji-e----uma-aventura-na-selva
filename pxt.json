@@ -1,0 +1,55 @@
+{
+    "name": "Felipe Kenzo, Gabriel, Gustavo Shinji e Luigi - Uma aventura na selva.",
+    "description": "",
+    "dependencies": {
+        "device": "*",
+        "arcade-character-animations": "github:microsoft/arcade-character-animations#v0.0.2",
+        "pxt-status-bar": "github:jwunderl/pxt-status-bar#v0.4.2",
+        "arcade-story": "github:microsoft/arcade-storytelling#v1.0.3",
+        "dsf e\\afdgfcbdsasfdvcv": "github:tennirb/exarcadelp#master",
+        "darts": "*"
+    },
+    "files": [
+        "main.blocks",
+        "main.ts",
+        "README.md",
+        "assets.json",
+        "tilemap.g.jres",
+        "tilemap.g.ts",
+        "images.g.jres",
+        "images.g.ts"
+    ],
+    "testFiles": [
+        "test.ts"
+    ],
+    "targetVersions": {
+        "branch": "v2.0.48",
+        "tag": "v2.0.48",
+        "commits": "https://github.com/microsoft/pxt-arcade/commits/cb1bfd53862604a2129aba2eff909d3bec8826ed",
+        "target": "2.0.56",
+        "pxt": "11.3.51",
+        "targetId": "arcade"
+    },
+    "supportedTargets": [
+        "arcade"
+    ],
+    "preferredEditor": "blocksprj",
+    "palette": [
+        "#000000",
+        "#FFFFFF",
+        "#FF2121",
+        "#FF93C4",
+        "#FF8135",
+        "#FFF609",
+        "#09580E",
+        "#78DC52",
+        "#106557",
+        "#87F2FF",
+        "#8E2EC4",
+        "#A4839F",
+        "#5C406c",
+        "#E5CDC4",
+        "#91463d",
+        "#000000"
+    ]
+}
