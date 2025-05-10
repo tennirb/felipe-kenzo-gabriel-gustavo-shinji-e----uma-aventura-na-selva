@@ -22,10 +22,11 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.cobra, function (sprite, oth
         . 2 c c c c c c c c c f 2 . . . 
         `)
     cobra.follow(Fernando, 0)
-    story.startCutscene(function () {
-        story.printCharacterText("Fernando matou uma cobra que tentou atacá-lo. Ele comeu choalete e bebeu água, agora está indo pela direção oposta do Sol para reencontrar o acampamento.", "Narrador")
+    timer.background(function () {
+        story.startCutscene(function () {
+            story.printCharacterText("Fernando matou uma cobra que tentou atacá-lo. Ele comeu choalete e bebeu água, agora está indo pela direção oposta do Sol para reencontrar o acampamento.", "Narrador")
+        })
     })
-    story.printCharacterText("Devido a alguns erros, esse jogo não foi terminar isso essa semana, me desculpe.", "Narrador")
 })
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     if (pedra == 1) {
@@ -37,6 +38,7 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
             . c b b b d c . 
             . . c c c c . . 
             `, Fernando, 50, 50)
+        projectile2.follow(cobra)
     }
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile32`, function (sprite, location) {
@@ -48,35 +50,39 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile33`, function (sprite, 
     info.changeLifeBy(-1)
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile37`, function (sprite, location) {
-    tiles.setCurrentTilemap(tilemap`bag0`)
-    timer.background(function () {
-        pedra = 1
-        Notification.notify("Espere um pouco, Fernando está acordando em 5 segundos. ")
-        Notification.waitForNotificationFinish()
-        timer.after(500, function () {
-            info.setLife(1)
-            cobra = sprites.create(img`
-                . . . . c c c c c c . . . . . . 
-                . . . c 6 7 7 7 7 6 c . . . . . 
-                . . c 7 7 7 7 7 7 7 7 c . . . . 
-                . c 6 7 7 7 7 7 7 7 7 6 c . . . 
-                . c 7 c 6 6 6 6 c 7 7 7 c . . . 
-                . f 7 6 f 6 6 f 6 7 7 7 f . . . 
-                . f 7 7 7 7 7 7 7 7 7 7 f . . . 
-                . . f 7 7 7 7 6 c 7 7 6 f c . . 
-                . . . f c c c c 7 7 6 f 7 7 c . 
-                . . c 7 2 7 7 7 6 c f 7 7 7 7 c 
-                . c 7 7 2 7 7 c f c 6 7 7 6 c c 
-                c 1 1 1 1 7 6 f c c 6 6 6 c . . 
-                f 1 1 1 1 1 6 6 c 6 6 6 6 f . . 
-                f 6 1 1 1 1 1 6 6 6 6 6 c f . . 
-                . f 6 1 1 1 1 1 1 6 6 6 f . . . 
-                . . c c c c c c c c c f . . . . 
-                `, SpriteKind.cobra)
-            cobra.follow(Fernando, 80)
-            story.printCharacterText("Fernando acorda, bebe água e come chocolate e molha o rosto. Ele decidiu abrir a mata na direção oposta do Sol, pois lembrou que entrou na mata seguindo-o. ", "Narrador")
-            timer.after(5000, function () {
-                tiles.setCurrentTilemap(tilemap`level4`)
+    tiles.setCurrentTilemap(tilemap`bag3`)
+    timer.after(9000, function () {
+        timer.background(function () {
+            tiles.setCurrentTilemap(tilemap`bag`)
+            pedra = 1
+            Notification.notify("Espere um pouco, Fernando está acordando em 5 segundos. ")
+            Notification.waitForNotificationFinish()
+            timer.after(500, function () {
+                info.setLife(1)
+                cobra = sprites.create(img`
+                    . . . . c c c c c c . . . . . . 
+                    . . . c 6 7 7 7 7 6 c . . . . . 
+                    . . c 7 7 7 7 7 7 7 7 c . . . . 
+                    . c 6 7 7 7 7 7 7 7 7 6 c . . . 
+                    . c 7 c 6 6 6 6 c 7 7 7 c . . . 
+                    . f 7 6 f 6 6 f 6 7 7 7 f . . . 
+                    . f 7 7 7 7 7 7 7 7 7 7 f . . . 
+                    . . f 7 7 7 7 6 c 7 7 6 f c . . 
+                    . . . f c c c c 7 7 6 f 7 7 c . 
+                    . . c 7 2 7 7 7 6 c f 7 7 7 7 c 
+                    . c 7 7 2 7 7 c f c 6 7 7 6 c c 
+                    c 1 1 1 1 7 6 f c c 6 6 6 c . . 
+                    f 1 1 1 1 1 6 6 c 6 6 6 6 f . . 
+                    f 6 1 1 1 1 1 6 6 6 6 6 c f . . 
+                    . f 6 1 1 1 1 1 1 6 6 6 f . . . 
+                    . . c c c c c c c c c f . . . . 
+                    `, SpriteKind.cobra)
+                cobra.follow(Fernando, 80)
+                tiles.placeOnTile(cobra, tiles.getTileLocation(29, 7))
+                story.printCharacterText("Fernando acorda, bebe água e come chocolate e molha o rosto. Ele decidiu abrir a mata na direção oposta do Sol, pois lembrou que entrou na mata seguindo-o. ", "Narrador")
+                timer.after(5000, function () {
+                    tiles.setCurrentTilemap(tilemap`level4`)
+                })
             })
         })
     })
@@ -113,7 +119,7 @@ info.onScore(5, function () {
             . . . . . . . . . . . . . . . . 
             `)
         Notification.waitForNotificationFinish()
-        Notification.notify("Colete 6 folhas para fazer uma rede paa dormir nela.", 0.5, img`
+        Notification.notify("Colete 6 folhas para fazer uma rede para dormir nela.", 0.5, img`
             . . . . . . . . . . . . . . . . 
             . . . . . . . . . . . . . . . . 
             . . . . . . . . . . . . . . . . 
@@ -136,16 +142,20 @@ info.onScore(5, function () {
         tiles.placeOnTile(Fernando, tiles.getTileLocation(12, 4))
     })
     timer.after(500, function () {
-    	
+        Notification.waitForNotificationFinish()
+        info.setScore(0)
+        Notification.waitForNotificationFinish()
     })
-    Notification.waitForNotificationFinish()
-    info.setScore(0)
 })
 let projectile2: Sprite = null
 let cobra: Sprite = null
 let pedra = 0
 let Fernando: Sprite = null
-let Toninho = sprites.create(assets.image`myImage`, SpriteKind.NPC)
+game.splash("Aperte A - Espaço - para continuar;")
+game.splash("Aperte B - Enter -  quando uma cobra aparecer para matá-lá;", "")
+game.splash("Esse jogo  foi feito por Gabriel Galindo, Luigi Guedes, Felipe Kenzo e Gustavo Shinji;")
+game.splash("Fernando é o personagem que você pode controlar, ele começa sua aventura em um acampamaneto, com seu irmão Toninho.")
+let Toninho = sprites.create(assets.image`myImage`, SpriteKind.Player)
 Fernando = sprites.create(assets.image`myImage1`, SpriteKind.Player)
 info.setScore(0)
 Toninho.setPosition(34, 30)
