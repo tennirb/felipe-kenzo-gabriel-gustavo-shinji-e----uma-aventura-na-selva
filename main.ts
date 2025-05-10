@@ -8,6 +8,9 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile32`, function (sprite, 
     tiles.setTileAt(location, assets.tile`myTile1`)
     info.changeScoreBy(1)
 })
+controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+    Notification.notify("Error code - 507 - Reinicie o jogo. Não repita isso.")
+})
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile33`, function (sprite, location) {
     tiles.setTileAt(location, assets.tile`myTile1`)
     info.changeLifeBy(-1)
