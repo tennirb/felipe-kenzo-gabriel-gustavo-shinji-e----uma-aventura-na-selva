@@ -50,6 +50,9 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile33`, function (sprite, 
     info.changeLifeBy(-1)
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile37`, function (sprite, location) {
+    if (Notification.isNotifying()) {
+        Notification.cancelNotification()
+    }
     tiles.setCurrentTilemap(tilemap`bag3`)
     timer.after(9000, function () {
         timer.background(function () {
