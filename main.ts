@@ -1,47 +1,12 @@
 namespace SpriteKind {
     export const NPC = SpriteKind.create()
+    export const cobra = SpriteKind.create()
 }
 namespace StatusBarKind {
     export const Medo = StatusBarKind.create()
 }
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile32`, function (sprite, location) {
-    tiles.setTileAt(location, assets.tile`myTile1`)
-    info.changeScoreBy(1)
-})
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile33`, function (sprite, location) {
-    tiles.setTileAt(location, assets.tile`myTile1`)
-    info.changeLifeBy(-1)
-})
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile37`, function (sprite, location) {
-    timer.after(500, function () {
-        Notification.notify("Espere um pouco.")
-    })
-    info.setLife(1)
-    cobra = sprites.create(img`
-        . . . . c c c c c c . . . . . . 
-        . . . c 6 7 7 7 7 6 c . . . . . 
-        . . c 7 7 7 7 7 7 7 7 c . . . . 
-        . c 6 7 7 7 7 7 7 7 7 6 c . . . 
-        . c 7 c 6 6 6 6 c 7 7 7 c . . . 
-        . f 7 6 f 6 6 f 6 7 7 7 f . . . 
-        . f 7 7 7 7 7 7 7 7 7 7 f . . . 
-        . . f 7 7 7 7 6 c 7 7 6 f c . . 
-        . . . f c c c c 7 7 6 f 7 7 c . 
-        . . c 7 2 7 7 7 6 c f 7 7 7 7 c 
-        . c 7 7 2 7 7 c f c 6 7 7 6 c c 
-        c 1 1 1 1 7 6 f c c 6 6 6 c . . 
-        f 1 1 1 1 1 6 6 c 6 6 6 6 f . . 
-        f 6 1 1 1 1 1 6 6 6 6 6 c f . . 
-        . f 6 1 1 1 1 1 1 6 6 6 f . . . 
-        . . c c c c c c c c c f . . . . 
-        `, SpriteKind.Player)
-    cobra.follow(Fernando, 80)
-    story.printCharacterText("Fernando acorda, bebe água e come chocolate e molha o rosto. Ele decidiu abrir a mata na direção oposta do Sol, pois lembrou que entrou na mata seguindo-o. ", "Narrador")
-    timer.after(5000, function () {
-        tiles.setCurrentTilemap(tilemap`level4`)
-    })
-    story.printCharacterText("Fernando matou uma cobra que tentou atacá-lo. Ele comeu choalete e bebeu água, agora está indo pela direção oposta do Sol para reencontrar o acampamento.", "Narrador")
-    cobra2 = sprites.create(img`
+sprites.onOverlap(SpriteKind.Projectile, SpriteKind.cobra, function (sprite, otherSprite) {
+    cobra.setImage(img`
         . . . . c c c c c . . . . . . . 
         . . . c 6 7 2 7 2 . . . . . . . 
         . . c 7 7 7 2 7 2 2 . . . . . . 
@@ -58,8 +23,61 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile37`, function (sprite, 
         f 2 1 2 1 2 1 2 6 6 2 6 2 f . . 
         . 2 6 2 1 2 1 2 1 6 2 6 2 . . . 
         . 2 c c c c c c c c c f 2 . . . 
-        `, SpriteKind.Player)
+        `)
+    cobra.follow(Fernando, 0)
+    story.startCutscene(function () {
+        story.printCharacterText("Fernando matou uma cobra que tentou atacá-lo. Ele comeu choalete e bebeu água, agora está indo pela direção oposta do Sol para reencontrar o acampamento.", "Narrador")
+    })
     story.printCharacterText("Devido a alguns erros, esse jogo não foi terminar isso essa semana, me desculpe.", "Narrador")
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile32`, function (sprite, location) {
+    tiles.setTileAt(location, assets.tile`myTile1`)
+    info.changeScoreBy(1)
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile33`, function (sprite, location) {
+    tiles.setTileAt(location, assets.tile`myTile1`)
+    info.changeLifeBy(-1)
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile37`, function (sprite, location) {
+    timer.background(function () {
+        Notification.notify("Espere um pouco, Fernando está acordando em 5 segundos. ")
+        timer.after(500, function () {
+            info.setLife(1)
+            cobra = sprites.create(img`
+                . . . . c c c c c c . . . . . . 
+                . . . c 6 7 7 7 7 6 c . . . . . 
+                . . c 7 7 7 7 7 7 7 7 c . . . . 
+                . c 6 7 7 7 7 7 7 7 7 6 c . . . 
+                . c 7 c 6 6 6 6 c 7 7 7 c . . . 
+                . f 7 6 f 6 6 f 6 7 7 7 f . . . 
+                . f 7 7 7 7 7 7 7 7 7 7 f . . . 
+                . . f 7 7 7 7 6 c 7 7 6 f c . . 
+                . . . f c c c c 7 7 6 f 7 7 c . 
+                . . c 7 2 7 7 7 6 c f 7 7 7 7 c 
+                . c 7 7 2 7 7 c f c 6 7 7 6 c c 
+                c 1 1 1 1 7 6 f c c 6 6 6 c . . 
+                f 1 1 1 1 1 6 6 c 6 6 6 6 f . . 
+                f 6 1 1 1 1 1 6 6 6 6 6 c f . . 
+                . f 6 1 1 1 1 1 1 6 6 6 f . . . 
+                . . c c c c c c c c c f . . . . 
+                `, SpriteKind.cobra)
+            cobra.follow(Fernando, 80)
+            story.printCharacterText("Fernando acorda, bebe água e come chocolate e molha o rosto. Ele decidiu abrir a mata na direção oposta do Sol, pois lembrou que entrou na mata seguindo-o. ", "Narrador")
+            timer.after(5000, function () {
+                tiles.setCurrentTilemap(tilemap`level4`)
+            })
+            if (controller.A.isPressed()) {
+                projectile = sprites.createProjectileFromSide(img`
+                    . . c c c c . . 
+                    . c d b b b c . 
+                    c 1 b 1 1 b d c 
+                    c 1 b b d c 1 c 
+                    . c b b b d c . 
+                    . . c c c c . . 
+                    `, 50, 50)
+            }
+        })
+    })
 })
 info.onLifeZero(function () {
     timer.after(500, function () {
@@ -113,6 +131,7 @@ info.onScore(5, function () {
             `)
         Notification.waitForNotificationFinish()
         tiles.setCurrentTilemap(tilemap`level0`)
+        tiles.placeOnTile(Fernando, tiles.getTileLocation(12, 4))
     })
     timer.after(500, function () {
     	
@@ -120,7 +139,7 @@ info.onScore(5, function () {
     Notification.waitForNotificationFinish()
     info.setScore(0)
 })
-let cobra2: Sprite = null
+let projectile: Sprite = null
 let cobra: Sprite = null
 let Fernando: Sprite = null
 let Toninho = sprites.create(assets.image`myImage`, SpriteKind.NPC)
@@ -249,7 +268,7 @@ forever(function () {
 })
 forever(function () {
     characterAnimations.loopFrames(
-    cobra2,
+    cobra,
     [img`
         . . . . c c c c c c . . . . . . 
         . . . c 6 7 7 7 7 6 c . . . . . 
