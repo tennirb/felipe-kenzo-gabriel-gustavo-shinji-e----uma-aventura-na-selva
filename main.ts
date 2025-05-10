@@ -1,11 +1,8 @@
 namespace SpriteKind {
-    export const NPC = SpriteKind.create()
     export const cobra = SpriteKind.create()
 }
-namespace StatusBarKind {
-    export const Medo = StatusBarKind.create()
-}
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.cobra, function (sprite, otherSprite) {
+    pedra += -1
     cobra.setImage(img`
         . . . . c c c c c . . . . . . . 
         . . . c 6 7 2 7 2 . . . . . . . 
@@ -30,6 +27,18 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.cobra, function (sprite, oth
     })
     story.printCharacterText("Devido a alguns erros, esse jogo não foi terminar isso essa semana, me desculpe.", "Narrador")
 })
+controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (pedra == 1) {
+        projectile2 = sprites.createProjectileFromSprite(img`
+            . . c c c c . . 
+            . c d b b b c . 
+            c 1 b 1 1 b d c 
+            c 1 b b d c 1 c 
+            . c b b b d c . 
+            . . c c c c . . 
+            `, Fernando, 50, 50)
+    }
+})
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile32`, function (sprite, location) {
     tiles.setTileAt(location, assets.tile`myTile1`)
     info.changeScoreBy(1)
@@ -41,6 +50,7 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile33`, function (sprite, 
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile37`, function (sprite, location) {
     tiles.setCurrentTilemap(tilemap`bag0`)
     timer.background(function () {
+        pedra = 1
         Notification.notify("Espere um pouco, Fernando está acordando em 5 segundos. ")
         Notification.waitForNotificationFinish()
         timer.after(500, function () {
@@ -68,16 +78,6 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile37`, function (sprite, 
             timer.after(5000, function () {
                 tiles.setCurrentTilemap(tilemap`level4`)
             })
-            if (controller.A.isPressed()) {
-                projectile = sprites.createProjectileFromSide(img`
-                    . . c c c c . . 
-                    . c d b b b c . 
-                    c 1 b 1 1 b d c 
-                    c 1 b b d c 1 c 
-                    . c b b b d c . 
-                    . . c c c c . . 
-                    `, 50, 50)
-            }
         })
     })
 })
@@ -141,8 +141,9 @@ info.onScore(5, function () {
     Notification.waitForNotificationFinish()
     info.setScore(0)
 })
-let projectile: Sprite = null
+let projectile2: Sprite = null
 let cobra: Sprite = null
+let pedra = 0
 let Fernando: Sprite = null
 let Toninho = sprites.create(assets.image`myImage`, SpriteKind.NPC)
 Fernando = sprites.create(assets.image`myImage1`, SpriteKind.Player)
