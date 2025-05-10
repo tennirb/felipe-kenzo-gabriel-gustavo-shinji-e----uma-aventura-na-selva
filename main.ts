@@ -13,18 +13,39 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile33`, function (sprite, 
     info.changeLifeBy(-1)
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile37`, function (sprite, location) {
+    tiles.setCurrentTilemap(tilemap`level4`)
     info.setLife(1)
-    tiles.setCurrentTilemap(tilemap`level5`)
+    cobra = sprites.create(img`
+        . . . . c c c c c c . . . . . . 
+        . . . c 6 7 7 7 7 6 c . . . . . 
+        . . c 7 7 7 7 7 7 7 7 c . . . . 
+        . c 6 7 7 7 7 7 7 7 7 6 c . . . 
+        . c 7 c 6 6 6 6 c 7 7 7 c . . . 
+        . f 7 6 f 6 6 f 6 7 7 7 f . . . 
+        . f 7 7 7 7 7 7 7 7 7 7 f . . . 
+        . . f 7 7 7 7 6 c 7 7 6 f c . . 
+        . . . f c c c c 7 7 6 f 7 7 c . 
+        . . c 7 2 7 7 7 6 c f 7 7 7 7 c 
+        . c 7 7 2 7 7 c f c 6 7 7 6 c c 
+        c 1 1 1 1 7 6 f c c 6 6 6 c . . 
+        f 1 1 1 1 1 6 6 c 6 6 6 6 f . . 
+        f 6 1 1 1 1 1 6 6 6 6 6 c f . . 
+        . f 6 1 1 1 1 1 1 6 6 6 f . . . 
+        . . c c c c c c c c c f . . . . 
+        `, SpriteKind.Player)
+    cobra.follow(Fernando, 80)
+    story.printCharacterText("Fernando acorda, bebe água e come chocolate e molha o rosto. Ele decidiu abrir a mata na direção oposta do Sol, pois lembrou que entrou na mata seguindo-o. ", "Narrador")
     timer.after(5000, function () {
         tiles.setCurrentTilemap(tilemap`level4`)
     })
-    cobra = sprites.create(img`
-        . . . . c c c c c c . . . . . . 
-        . . . c 6 7 2 7 7 6 c . . . . . 
-        . . c 7 7 7 2 7 7 7 7 c . . . . 
-        . c 6 7 7 7 2 7 7 7 7 6 c . . . 
-        . c 7 2 6 2 2 6 2 7 7 7 c . . . 
-        . f 7 6 2 6 6 2 6 7 7 7 f . . . 
+    story.printCharacterText("Fernando matou uma cobra que tentou atacá-lo. Ele comeu choalete e bebeu água, agora está indo pela direção oposta do Sol para reencontrar o acampamento.", "Narrador")
+    cobra2 = sprites.create(img`
+        . . . . c c c c c . . . . . . . 
+        . . . c 6 7 2 7 2 . . . . . . . 
+        . . c 7 7 7 2 7 2 2 . . . . . . 
+        . c 6 7 7 7 2 7 7 2 2 . . . . . 
+        . c 7 2 6 2 2 6 2 7 2 2 . . . . 
+        . f 7 6 2 6 6 2 6 7 7 7 . . . . 
         . f 7 2 7 2 2 7 2 7 2 7 f . . . 
         . . f 7 7 2 7 6 c 7 2 6 f c . . 
         . . . f c 2 c c 7 7 2 f 7 2 c . 
@@ -35,8 +56,7 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile37`, function (sprite, 
         f 2 1 2 1 2 1 2 6 6 2 6 2 f . . 
         . 2 6 2 1 2 1 2 1 6 2 6 2 . . . 
         . 2 c c c c c c c c c f 2 . . . 
-        `, SpriteKind.NPC)
-    story.printCharacterText("Fernando matou uma cobra que tentou atacá-lo. Ele comeu choalete e bebeu água, agora está indo pela direção oposta do Sol para reencontrar o acampamento.", "Narrador")
+        `, SpriteKind.Player)
 })
 info.onLifeZero(function () {
     timer.after(500, function () {
@@ -45,8 +65,8 @@ info.onLifeZero(function () {
             Notification.notify("Encoste na rede para dormir...", 1, assets.image`myImage1`)
         })
         tiles.setCurrentTilemap(tilemap`bag`)
+        tiles.placeOnTile(Fernando, tiles.getTileLocation(29, 8))
     })
-    Fernando.setPosition(70, 62)
 })
 info.onScore(5, function () {
     Notification.waitForNotificationFinish()
@@ -97,6 +117,7 @@ info.onScore(5, function () {
     Notification.waitForNotificationFinish()
     info.setScore(0)
 })
+let cobra2: Sprite = null
 let cobra: Sprite = null
 let Fernando: Sprite = null
 let Toninho = sprites.create(assets.image`myImage`, SpriteKind.NPC)
@@ -225,7 +246,7 @@ forever(function () {
 })
 forever(function () {
     characterAnimations.loopFrames(
-    cobra,
+    cobra2,
     [img`
         . . . . c c c c c c . . . . . . 
         . . . c 6 7 7 7 7 6 c . . . . . 
