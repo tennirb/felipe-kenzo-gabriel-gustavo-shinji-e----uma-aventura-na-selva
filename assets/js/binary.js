@@ -1,4 +1,4 @@
-// meta={"simUrl":"https://trg-arcade.userpxt.io/v2.0.56/---simulator","cdnUrl":"https://cdn.makecode.com","version":"0.0.2","target":"arcade","targetVersion":"2.0.56","repo":"tennirb/felipe-kenzo-gabriel-gustavo-shinji-e----uma-aventura-na-selva"}
+// meta={"simUrl":"https://trg-arcade.userpxt.io/v2.0.56/---simulator","cdnUrl":"https://cdn.makecode.com","version":"0.1.0","target":"arcade","targetVersion":"2.0.56","repo":"tennirb/felipe-kenzo-gabriel-gustavo-shinji-e----uma-aventura-na-selva"}
 // total=2657293 new=21.80% cached=73.99% other=4.21%
 (function (ectx) {
 'use strict';
@@ -656,7 +656,7 @@ const pxsim_pxtrt = pxsim.pxtrt;
 const pxsim_numops = pxsim.numops;
 
 
-function _main___P28766(s) {
+function _main___P28997(s) {
 let r0 = s.r0, step = s.pc;
 s.pc = -1;
 
@@ -1491,13 +1491,13 @@ switch (step) {
     return leave(s, r0)
   default: oops()
 } } }
-_main___P28766.info = {"start":0,"length":0,"line":0,"column":0,"endLine":0,"endColumn":0,"fileName":"pxt_modules/arcade-character-animations/main.ts","functionName":"<main>","argumentNames":[]}
-_main___P28766.continuations = [ 48,49,50,51 ]
+_main___P28997.info = {"start":0,"length":0,"line":0,"column":0,"endLine":0,"endColumn":0,"fileName":"pxt_modules/arcade-character-animations/main.ts","functionName":"<main>","argumentNames":[]}
+_main___P28997.continuations = [ 48,49,50,51 ]
 
-function _main___P28766_mk(s) {
+function _main___P28997_mk(s) {
     checkStack(s.depth);
     return {
-        parent: s, fn: _main___P28766, depth: s.depth + 1,
+        parent: s, fn: _main___P28997, depth: s.depth + 1,
         pc: 0, retval: undefined, r0: undefined, overwrittenPC: false, lambdaArgs: null,
   tmp_0: undefined,
   tmp_1: undefined,
@@ -75693,5 +75693,5 @@ const sprites_BaseSpriteSayRenderer__C2273_VT = mkVTable({
 
 const breakpoints = setupDebugger(1, ["transparency16___5056","tile3___5059","tile10___5063","tile9___5064","tile8___5065","tile7___5066","tile4___5067","tile13___5069","tile14___5070","tile17___5072","tile24___5079","tile25___5080","tile26___5081","tile34___5089","tile35___5090","tile1___5057","tile16___5071","tile11___5062","tile27___5082","tile28___5083","tile30___5085","tile31___5086","tile32___5087","tile39___5095","tile2___5058","tile5___5060","tile6___5061","tile12___5068","tile19___5073","tile18___5074","tile20___5075","tile21___5076","tile22___5077","tile23___5078","tile29___5084","tile33___5088","tile36___5091","tile37___5092","tile15___5093","tile38___5094","NPC___5048","Medo___5050","cobra___5052","Fernando___5053","cobra2___5051","Toninho___5054"])
 
-return _main___P28766
+return _main___P28997
 })
