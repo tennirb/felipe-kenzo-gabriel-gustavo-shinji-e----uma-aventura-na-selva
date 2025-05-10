@@ -59,6 +59,7 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile37`, function (sprite, 
         . 2 6 2 1 2 1 2 1 6 2 6 2 . . . 
         . 2 c c c c c c c c c f 2 . . . 
         `, SpriteKind.Player)
+    story.printCharacterText("Devido a alguns errors, esse jogo não foi terminar isso essa semana, me desculpe.", "Narrador")
 })
 info.onLifeZero(function () {
     timer.after(500, function () {
