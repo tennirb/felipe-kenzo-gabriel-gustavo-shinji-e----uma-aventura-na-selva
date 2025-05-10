@@ -39,8 +39,10 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile33`, function (sprite, 
     info.changeLifeBy(-1)
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile37`, function (sprite, location) {
+    tiles.setCurrentTilemap(tilemap`bag0`)
     timer.background(function () {
         Notification.notify("Espere um pouco, Fernando está acordando em 5 segundos. ")
+        Notification.waitForNotificationFinish()
         timer.after(500, function () {
             info.setLife(1)
             cobra = sprites.create(img`
