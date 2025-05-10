@@ -13,7 +13,9 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile33`, function (sprite, 
     info.changeLifeBy(-1)
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile37`, function (sprite, location) {
-    tiles.setCurrentTilemap(tilemap`level4`)
+    timer.after(500, function () {
+        tiles.setCurrentTilemap(tilemap`level4`)
+    })
     info.setLife(1)
     cobra = sprites.create(img`
         . . . . c c c c c c . . . . . . 
