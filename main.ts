@@ -45,12 +45,15 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.cobra, function (sprite, oth
         })
     })
     sprites.destroy(projectile2)
-    tiles.setCurrentTilemap(tilemap`level7`)
     Notification.notify("Estou com fome, vou comer esses ovos e andar, espera ai..... UM RIO E MILHARAL, ESTOU SALVO!")
     Notification.waitForNotificationFinish()
     story.startCutscene(function () {
         story.printCharacterText("Depois de muito tempo caminhando, Fernando achou um rio, atravesse-o para continuar.", "Narrador")
     })
+    Notification.notify("....................]", 0.01)
+    Notification.waitForNotificationFinish()
+    tiles.setCurrentTilemap(tilemap`level7`)
+    tiles.placeOnTile(Fernando, tiles.getTileLocation(7, 13))
 })
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     if (pedra == 1) {
